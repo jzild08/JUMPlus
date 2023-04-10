@@ -128,6 +128,11 @@ public class MainBankApp {
 								System.out.println("\nLogging out\n");
 								client = null;
 								break;
+								
+							default:
+								
+								System.err.println("\nInvalid Option\n");
+								break;
 						}
 					}
 					break;
@@ -141,6 +146,11 @@ public class MainBankApp {
 					System.out.println("Exiting App...");
 					bank.terminateConnection();
 					runApp = false;
+					break;
+				
+				default:
+					
+					System.err.println("\nPlease Enter a valid sellection\n");
 					break;
 			}
 		}
