@@ -14,19 +14,18 @@ public class Transaction {
 	
 	public String createTransactionNumber() {
 		
-		String header="TRS";
+		String header="TRS-";
 		String characters = "abcdefghijklmnopqrstuvwxyz1234567890";
-		
 		String trans = "";
 		
 		trans += header;
 		
-		for(int i = 0; i < 7; i ++) {
+		for(int i = 0; i < 6; i ++) {
 			
 			trans += characters.charAt((int)Math.round(Math.random() * (characters.length() - 1)));
 		}
 		
-		return trans;
+		return trans.toUpperCase();
 	}
 	
 	public Transaction() {}
@@ -34,6 +33,7 @@ public class Transaction {
 	public Transaction(String accountNumber, String transactionType, double amount, String sender) {
 		super();
 		this.transactionID = createTransactionNumber();
+		this.accountNumber = accountNumber;
 		this.transactionType = transactionType;
 		this.amount = amount;
 		this.localDate = new SimpleDateFormat("MM/dd/yy").format(new Date());
