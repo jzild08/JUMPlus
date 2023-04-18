@@ -183,13 +183,14 @@ public class MainBankDao {
 	//Transaction History
 	public void getTransactionHistory(Client client) throws SQLException {
 		
-		this.ps = this.conn.prepareStatement("select * from transaction where accountNumber = ? order by transactionDate desc limit 5");
+		this.ps = this.conn.prepareStatement("select * from transaction where accountNumber = ? or username = ? order by transactionDate desc limit 5");
 		this.ps.setString(1, client.getAccountNumber());
+		this.ps.setString(2, client.getUsername());
 		this.rs = this.ps.executeQuery();
 		
 		while(this.rs.next()) {
-			
-			System.out.println("TransactionID: " + this.rs.getString("transactionID") + " Account Number: " + this.rs.getString("accountNumber") + " TransactionType: " + this.rs.getString("transactionType") + " Amount: " + this.rs.getDouble("amount") + " Date and Time: " + this.rs.getTimestamp("transactionDate") + " Sender?: " + this.rs.getString("username") );
+						
+			System.out.println("TransactionID: " + this.rs.getString("transactionID") + "  TransactionType: " + this.rs.getString("transactionType") + "  Amount: " + this.rs.getDouble("amount") + "  Date and Time: " + this.rs.getTimestamp("transactionDate"));
 		}
 	}
 	
@@ -218,8 +219,6 @@ public class MainBankDao {
 		newClient.setLastName(input.next());
 		System.out.println("Enter a username: ");
 		newClient.setUsername(input.next());
-		
-		
 		
 		while(checkUsername(newClient.getUsername()) == true) {
 				
